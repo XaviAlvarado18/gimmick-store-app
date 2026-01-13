@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Product } from "../types/shop";
+import type { Product } from "../../types/shop";
 
 defineProps<{ product: Product }>();
 
@@ -48,7 +48,7 @@ defineEmits<{
 /* para cortar texto como en la captura */
 .line-clamp-1{
   display: -webkit-box;
-  -webkit-line-clamp: 1;
+  line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
