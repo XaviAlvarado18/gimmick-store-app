@@ -175,9 +175,11 @@ import { computed, onMounted } from "vue";
 import AppShell from "../components/layout/AppShell.vue";
 import { router } from "../router";
 import { useCartStore } from "../stores/cart";
+import { useRouter } from "vue-router";
 import { useProductsStore } from "../stores/products";
 import type { Product } from "../types/fakestore";
 
+const router = useRouter(); 
 const cart = useCartStore();
 const products = useProductsStore();
 
