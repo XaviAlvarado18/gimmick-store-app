@@ -52,7 +52,6 @@ export const useProductsStore = defineStore("products", {
       try {
         this.categories = await getCategories();
       } catch {
-        // no bloqueamos la app si falla
         this.categories = [];
       }
     },

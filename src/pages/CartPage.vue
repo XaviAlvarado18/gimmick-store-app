@@ -173,17 +173,18 @@
 <script setup lang="ts">
 import { computed, onMounted } from "vue";
 import AppShell from "../components/layout/AppShell.vue";
+import { router } from "../router";
 import { useCartStore } from "../stores/cart";
-import { useProductsStore } from "../stores/products"; // <-- asumo que existe en tu proyecto
-import type { Product } from "../types/fakestore"; // ajusta si tu type está en otro path
+import { useRouter } from "vue-router";
+import { useProductsStore } from "../stores/products";
+import type { Product } from "../types/fakestore";
 
+const router = useRouter(); 
 const cart = useCartStore();
 const products = useProductsStore();
 
-// Carga productos (para tener title/image/price)
+// Carga productos si no están cargados
 onMounted(async () => {
-  // Si tu products store ya tiene lista, no vuelve a pedir (depende de tu implementación).
-  // Si no tienes esto, dime y te lo adapto a fetch por IDs.
   await products.fetchList?.();
 });
 
@@ -215,8 +216,9 @@ const rows = computed<Row[]>(() => {
 const subtotal = computed(() => rows.value.reduce((acc, r) => acc + r.lineTotal, 0));
 
 function checkout() {
-  // aquí puedes hacer tu flujo real de checkout
-  alert("Checkout pendiente 🙂");
+  alert("¡Purchase completed!");
+  cart.clear();
+  router.push("/");
 }
 </script>
 
