@@ -77,13 +77,14 @@
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import CategorySidebar from "../components/CategorySidebar.vue";
-import FooterBar from "../components/FooterBar.vue";
+import FooterBar from "../components/layout/FooterBar.vue";
 import Navbar from "../components/layout/Navbar.vue";
 import ProductCard from "../components/products/ProductCard.vue";
 import ProductGridSkeleton from "../components/products/ProductGridSkeleton.vue";
 
 import { useCartStore } from "../stores/cart";
 import { useProductsStore } from "../stores/products";
+import type { Category } from "../types/shop";
 
 const router = useRouter();
 const cartStore = useCartStore();
@@ -94,7 +95,7 @@ onMounted(async () => {
   await productsStore.fetchList();
 });
 
-async function onSelectCategory(cat: string | "all") {
+async function onSelectCategory(cat: Category | "all") {
   productsStore.setCategory(cat);
   await productsStore.fetchList();
 }

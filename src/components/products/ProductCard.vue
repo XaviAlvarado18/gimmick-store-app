@@ -6,6 +6,7 @@
         <button
           class="absolute top-2 right-2 h-7 w-7 rounded-lg bg-zinc-100 grid place-items-center text-xs"
           title="Quick view"
+          @click="$emit('open')"
         >
           ▣
         </button>
@@ -39,8 +40,9 @@ import type { Product } from "../../types/shop";
 
 defineProps<{ product: Product }>();
 
-defineEmits<{
+const emit = defineEmits<{
   (e: "add", id: number): void;
+  (e: "open"): void;
 }>();
 </script>
 
