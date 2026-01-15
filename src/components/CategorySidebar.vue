@@ -23,7 +23,6 @@
         <span class="capitalize">{{ c.label }}</span>
 
         <span class="flex items-center gap-2">
-          <!-- Check rojo como la imagen (en vez de ✅) -->
           <span
             v-if="c.value === selected"
             class="inline-flex items-center justify-center

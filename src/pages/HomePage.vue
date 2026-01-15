@@ -95,7 +95,7 @@ const cartStore = useCartStore();
 const productsStore = useProductsStore();
 
 onMounted(async () => {
-  await productsStore.fetchCategories(); // para filtros reales desde API
+  await productsStore.fetchCategories();
   await productsStore.fetchList();
 });
 
