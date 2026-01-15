@@ -48,7 +48,7 @@
 
         <!-- ✅ Botón con feedback -->
         <button
-          class="mt-6 h-11 px-6 rounded-full bg-sky-500/80 hover:bg-sky-500 text-white font-medium cursor-pointer transition"
+          class="mt-6 h-11 px-6 rounded-full bg-[#BD2C2D] hover:bg-[#A31D1D] text-white font-medium cursor-pointer transition"
           :class="added ? 'opacity-70' : ''"
           @click="add"
         >
