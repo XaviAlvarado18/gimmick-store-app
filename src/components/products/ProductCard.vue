@@ -19,15 +19,12 @@
           <span class="text-zinc-500" v-if="product.originalPrice">
             ${{ product.originalPrice.toFixed(2) }}
           </span>
-          <span class="ml-auto font-semibold text-zinc-700">
+          <span class="ml-auto p-2 font-semibold text-zinc-700">
             ${{ product.price.toFixed(2) }}
           </span>
         </div>
 
-        <button
-          class="mt-3 w-full h-10 rounded-full bg-sky-500/80 hover:bg-sky-500 text-white font-medium transition"
-          @click="$emit('add', product.id)"
-        >
+        <button class="w-full py-2 bg-[#BD2C2D] text-white rounded-lg font-semibold hover:bg-[#A31D1D] transition-colors">
           Add to Cart
         </button>
       </div>
