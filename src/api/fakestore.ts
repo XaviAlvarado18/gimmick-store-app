@@ -1,4 +1,5 @@
 import type { Product } from "../types/fakestore";
+import type { Category } from "../types/shop";
 import { http } from "./http";
 
 export async function getProducts(): Promise<Product[]> {
@@ -11,8 +12,8 @@ export async function getProductById(id: number): Promise<Product> {
   return data;
 }
 
-export async function getCategories(): Promise<string[]> {
-  const { data } = await http.get<string[]>("/products/categories");
+export async function getCategories(): Promise<Category[]> {
+  const { data } = await http.get<Category[]>("/products/categories");
   return data;
 }
 
