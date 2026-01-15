@@ -34,9 +34,10 @@
 
         <button
           class="w-full py-2 bg-[#BD2C2D] text-white rounded-lg font-semibold hover:bg-[#A31D1D] transition-colors cursor-pointer"
-          @click.stop="$emit('add', product.id)"
+          :class="added ? 'opacity-70' : ''"
+          @click.stop="onAddClick"
         >
-          Add to Cart
+          {{ added ? "Added ✔" : "Add to Cart" }}
         </button>
       </div>
     </div>
@@ -44,15 +45,32 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import type { Product } from "../../types/shop";
 
-defineProps<{ product: Product }>();
+const props = defineProps<{ product: Product }>();
 
-defineEmits<{
+const emit = defineEmits<{
   (e: "add", id: number): void;
   (e: "open"): void;
 }>();
+
+const added = ref(false);
+let timeoutId: number | undefined;
+
+function onAddClick() {
+  emit("add", props.product.id);
+
+  added.value = true;
+
+  if (timeoutId) window.clearTimeout(timeoutId);
+  timeoutId = window.setTimeout(() => {
+    added.value = false;
+    timeoutId = undefined;
+  }, 900);
+}
 </script>
+
 
 <style scoped>
 .line-clamp-1{
