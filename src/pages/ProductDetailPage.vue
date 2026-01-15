@@ -23,8 +23,22 @@
     <!-- Detail -->
     <div
       v-else-if="products.detail"
-      class="bg-white/70 border border-white rounded-2xl p-6 flex flex-col md:flex-row gap-6"
+      class="bg-white/70 relative border border-white rounded-2xl p-6 flex flex-col md:flex-row gap-6 pt-12 md:pt-14"
     >
+    <button
+        type="button"
+        class="absolute top-2 left-3 md:top-2 md:left-4
+              h-9 w-9 md:h-9 md:w-10
+              rounded-xl bg-white/90 border border-black/5 shadow-sm
+              grid place-items-center
+              text-zinc-700 hover:text-zinc-900 hover:bg-white
+              focus:outline-none focus:ring-2 focus:ring-[#BD2C2D]/30 cursor-pointer"
+        @click="$router.back()"
+        aria-label="Back"
+        title="Back"
+      >
+        ←
+      </button>
       <div class="md:w-1/2 bg-white rounded-2xl border border-zinc-100 grid place-items-center p-6">
         <img :src="products.detail.image" :alt="products.detail.title" class="max-h-80 object-contain" />
       </div>
