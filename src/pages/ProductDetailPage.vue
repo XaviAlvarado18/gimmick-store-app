@@ -1,5 +1,6 @@
 <template>
   <AppShell>
+    <!-- Loading -->
     <div v-if="products.loadingDetail" class="bg-white/70 border border-white rounded-2xl p-6">
       <div class="h-6 w-1/2 bg-zinc-200 rounded mb-4"></div>
       <div class="h-40 bg-zinc-200 rounded mb-4"></div>
@@ -7,11 +8,37 @@
       <div class="h-4 bg-zinc-200 rounded mb-2"></div>
     </div>
 
+    <!-- Error -->
     <div v-else-if="products.errorDetail" class="bg-white/70 border border-white rounded-xl p-4">
       <p class="text-zinc-700">{{ products.errorDetail }}</p>
+
+      <button
+        class="mt-3 px-4 py-2 rounded-full bg-zinc-900 text-white cursor-pointer"
+        @click="load"
+      >
+        Reintentar
+      </button>
     </div>
 
-    <div v-else-if="products.detail" class="bg-white/70 border border-white rounded-2xl p-6 flex flex-col md:flex-row gap-6">
+    <!-- Detail -->
+    <div
+      v-else-if="products.detail"
+      class="bg-white/70 relative border border-white rounded-2xl p-6 flex flex-col md:flex-row gap-6 pt-12 md:pt-14"
+    >
+    <button
+        type="button"
+        class="absolute top-2 left-3 md:top-2 md:left-4
+              h-9 w-9 md:h-9 md:w-10
+              rounded-xl bg-white/90 border border-black/5 shadow-sm
+              grid place-items-center
+              text-zinc-700 hover:text-zinc-900 hover:bg-white
+              focus:outline-none focus:ring-2 focus:ring-[#BD2C2D]/30 cursor-pointer"
+        @click="$router.back()"
+        aria-label="Back"
+        title="Back"
+      >
+        ←
+      </button>
       <div class="md:w-1/2 bg-white rounded-2xl border border-zinc-100 grid place-items-center p-6">
         <img :src="products.detail.image" :alt="products.detail.title" class="max-h-80 object-contain" />
       </div>
@@ -21,7 +48,9 @@
         <p class="text-sm text-zinc-500 mt-1">Category: {{ products.detail.category }}</p>
 
         <div class="mt-3 flex items-center gap-3">
-          <span class="text-xl font-semibold text-zinc-800">${{ products.detail.price.toFixed(2) }}</span>
+          <span class="text-xl font-semibold text-zinc-800">
+            ${{ products.detail.price.toFixed(2) }}
+          </span>
           <span class="text-sm text-zinc-600">
             ⭐ {{ products.detail.rating.rate }} ({{ products.detail.rating.count }})
           </span>
@@ -31,10 +60,11 @@
           {{ products.detail.description }}
         </p>
 
+        <!-- ✅ Botón con feedback -->
         <button
-          class="mt-6 h-11 px-6 rounded-full bg-sky-500/80 hover:bg-sky-500 text-white font-medium cursor-pointer"
+          class="mt-6 h-11 px-6 rounded-full bg-[#BD2C2D] hover:bg-[#A31D1D] text-white font-medium cursor-pointer transition"
           :class="added ? 'opacity-70' : ''"
-          @click="add()"
+          @click="add"
         >
           {{ added ? "Added ✔" : "Add to Cart" }}
         </button>
@@ -59,6 +89,7 @@ const added = ref(false);
 async function load() {
   const id = Number(route.params.id);
   if (!Number.isFinite(id)) return;
+
   await products.fetchDetail(id);
   added.value = false;
 }
@@ -68,8 +99,11 @@ watch(() => route.params.id, load);
 
 function add() {
   if (!products.detail) return;
-  cart.add(products.detail.id, 1);
+
+  // ✅ usa la misma firma que usas en Home
+  cart.add(products.detail.id);
+
   added.value = true;
-  setTimeout(() => (added.value = false), 900);
+  window.setTimeout(() => (added.value = false), 900);
 }
 </script>

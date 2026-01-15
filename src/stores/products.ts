@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
 import { getCategories, getProductById, getProducts, getProductsByCategory } from "../api/fakestore";
 import type { Product } from "../types/fakestore";
+import type { Category } from "../types/shop";
 
 type ProductsState = {
   items: Product[];
-  categories: string[];
-  selectedCategory: string | "all";
+  categories: Category[];
+  selectedCategory: Category | "all";
   query: string;
 
   loadingList: boolean;
@@ -42,15 +43,15 @@ export const useProductsStore = defineStore("products", {
     setQuery(v: string) {
       this.query = v;
     },
-    setCategory(cat: string | "all") {
-      this.selectedCategory = cat;
-    },
+    setCategory(cat: Category | "all") {
+  this.selectedCategory = cat;
+},
+
 
     async fetchCategories() {
       try {
         this.categories = await getCategories();
       } catch {
-        // no bloqueamos la app si falla
         this.categories = [];
       }
     },

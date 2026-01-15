@@ -19,7 +19,6 @@ export const useCartStore = defineStore("cart", {
     qtyByProduct: (s) => (productId: number) =>
       s.items.find((i) => i.productId === productId)?.qty ?? 0,
 
-    // total requiere productos con precio: lo calculamos desde UI pasando lista de productos
     totalFromProducts: (s) => (products: Product[]) => {
       const map = new Map(products.map((p) => [p.id, p.price]));
       return s.items.reduce((acc, it) => acc + (map.get(it.productId) ?? 0) * it.qty, 0);
