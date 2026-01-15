@@ -8,9 +8,7 @@
       </div>
 
       <div class="flex gap-3 text-white">
-        <span class="opacity-80">🐦</span>
-        <span class="opacity-80">🐦</span>
-        <span class="opacity-80">🐦</span>
+        <span class="opacity-80">Gimmick Store</span>
       </div>
     </div>
   </footer>
