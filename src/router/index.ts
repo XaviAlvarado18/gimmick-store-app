@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import CartPage from "../pages/CartPage.vue";
 import HomePage from "../pages/HomePage.vue";
 import ProductDetailPage from "../pages/ProductDetailPage.vue";
 
@@ -12,5 +13,11 @@ export const router = createRouter({
       component: ProductDetailPage,
       props: true,
     },
+    {
+      path: "/cart",
+      name: "cart",
+      component: CartPage,
+      props: true,
+    }
   ],
 });
